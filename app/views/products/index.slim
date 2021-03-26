@@ -1,12 +1,15 @@
 .row
-  .col-6
+  .col-4
     h1 This is product list
-  .col-6
+  .col-4
     .float-right
       div = current_user.email
       div = "#{current_user.username}"
       div = link_to 'Logout', destroy_user_session_path, method: :delete
-
+  .col-4
+    .float-right
+      = link_to categories_path do
+        = button_tag 'View Category', class: 'btn btn-primary'
 .row
   .col-8
     = form_tag products_path, method: :get do
@@ -21,7 +24,7 @@
           th Title
           th Stock
           th Description
-          / th Categories
+          th Categories
           th Created at
           th Updated at
           th Action
@@ -32,7 +35,7 @@
             td.font-weight-bold = a.title
             td = a.stock
             td = a.description
-            / td = a.categories.map(&:name)&.join(', ').presence || 'NA'
+            td = a.categories.map(&:name)&.join(', ').presence || 'NA'
             td.font-weight-light = "#{time_ago_in_words(a.created_at)} ago"
             td.font-weight-light = "#{time_ago_in_words(a.updated_at)} ago"
             td
@@ -47,12 +50,8 @@
                   i.fas.fa-trash
 
 .row
-  .col-4
+  .col-6
     = paginate @products
-  .col-4
+  .col-6
     = link_to new_product_path do
       = button_tag 'Add new Product', class: 'btn btn-primary'
-  / .col-4
-  /   .float-right
-  /     = link_to categories_path do
-  /       = button_tag 'View Category', class: 'btn btn-primary'

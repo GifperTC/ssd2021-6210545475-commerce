@@ -1,0 +1,49 @@
+.row
+  .col-4
+    h1 This is categories list
+  .col-4
+    .float-right
+      div = current_user.email
+      div = "#{current_user.username}"
+      div = link_to 'Logout', destroy_user_session_path, method: :delete
+  .col-4
+    .float-right
+      = link_to products_path do
+        = button_tag 'Back to products', class: 'btn btn-primary'
+
+.row
+  .col-8
+    = form_tag categories_path, method: :get do
+      = text_field_tag 'search', @search, placeholder: 'Type something here', class: 'form-control'
+
+.row.mt-2
+  .col
+    table.table.table-bordered.table-hover
+      thead.thead-dark
+        tr
+          th ID
+          th Name
+          th Action
+      tbody
+        - @categories.each do |a|
+          tr
+            td = a.id
+            td.font-weight-bold = a.name
+            td
+              span
+                = link_to category_path(a) do
+                  i.fas.fa-eye
+              span.ml-3
+                = link_to edit_category_path(a) do
+                  i.fas.fa-pen
+              span.ml-3
+                = link_to category_path(a), method: :delete do
+                  i.fas.fa-trash
+
+.row
+  .col-6
+    = paginate @categories
+  .col-6
+    .float-right
+      = link_to new_category_path do
+        = button_tag 'Add new Category', class: 'btn btn-primary'
