@@ -1,3 +1,26 @@
 h1 = @category.name
 div = link_to "Back", categories_path
 hr
+
+.row.mt-2
+  .col
+    table.table.table-bordered.table-hover
+      thead.thead-dark
+        tr
+          th ID
+          th Title
+          th Stock
+          th Description
+          th Categories
+          th Created at
+          th Updated at
+      tbody
+        - @category.products.each do |a|
+          tr
+            td = a.id
+            td.font-weight-bold = a.title
+            td = a.stock
+            td = a.description
+            td = a.categories.map(&:name)&.join(', ').presence || 'NA'
+            td.font-weight-light = "#{time_ago_in_words(a.created_at)} ago"
+            td.font-weight-light = "#{time_ago_in_words(a.updated_at)} ago"
