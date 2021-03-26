@@ -2,10 +2,8 @@
   .col-6
     h1 This is product list
   .col-6
-    .float-right
-      div = current_user.email
-      div = "#{current_user.username}"
-      div = link_to 'Logout', destroy_user_session_path, method: :delete
+    div = link_to 'Admin login', products_path
+
 
 .row
   .col-8
@@ -24,7 +22,6 @@
           / th Categories
           th Created at
           th Updated at
-          th Action
       tbody
         - @products.each do |a|
           tr
@@ -35,23 +32,10 @@
             / td = a.categories.map(&:name)&.join(', ').presence || 'NA'
             td.font-weight-light = "#{time_ago_in_words(a.created_at)} ago"
             td.font-weight-light = "#{time_ago_in_words(a.updated_at)} ago"
-            td
-              span
-                = link_to product_path(a) do
-                  i.fas.fa-eye
-              span.ml-3
-                = link_to edit_product_path(a) do
-                  i.fas.fa-pen
-              span.ml-3
-                = link_to product_path(a), method: :delete do
-                  i.fas.fa-trash
 
 .row
   .col-4
     = paginate @products
-  .col-4
-    = link_to new_product_path do
-      = button_tag 'Add new Product', class: 'btn btn-primary'
   / .col-4
   /   .float-right
   /     = link_to categories_path do
