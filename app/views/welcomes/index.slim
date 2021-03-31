@@ -4,10 +4,9 @@
   .col-6
     div = link_to 'Admin login', products_path
 
-
 .row
   .col-8
-    = form_tag products_path, method: :get do
+    = form_tag root_path, method: :get do
       = text_field_tag 'search', @search, placeholder: 'Type something here', class: 'form-control'
 
 .row.mt-2
@@ -19,7 +18,7 @@
           th Title
           th Stock
           th Description
-          / th Categories
+          th Categories
           th Created at
           th Updated at
       tbody
@@ -29,14 +28,10 @@
             td.font-weight-bold = a.title
             td = a.stock
             td = a.description
-            / td = a.categories.map(&:name)&.join(', ').presence || 'NA'
+            td = a.categories.map(&:name)&.join(', ').presence || 'NA'
             td.font-weight-light = "#{time_ago_in_words(a.created_at)} ago"
             td.font-weight-light = "#{time_ago_in_words(a.updated_at)} ago"
 
 .row
   .col-4
     = paginate @products
-  / .col-4
-  /   .float-right
-  /     = link_to categories_path do
-  /       = button_tag 'View Category', class: 'btn btn-primary'

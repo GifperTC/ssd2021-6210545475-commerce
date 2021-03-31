@@ -1,12 +1,14 @@
 .row
-  .col-4
+  .col-3
     h1 This is product list
-  .col-4
+  .col-3
+    div = link_to 'Admin login', products_path
+  .col-3
     .float-right
       div = current_user.email
       div = "#{current_user.username}"
       div = link_to 'Logout', destroy_user_session_path, method: :delete
-  .col-4
+  .col-3
     .float-right
       = link_to categories_path do
         = button_tag 'View Category', class: 'btn btn-primary'
