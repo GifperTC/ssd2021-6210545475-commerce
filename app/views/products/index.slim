@@ -16,6 +16,13 @@
   .col-8
     = form_tag products_path, method: :get do
       = text_field_tag 'search', @search, placeholder: 'Type something here', class: 'form-control'
+  .col-2
+    = link_to products_path(format: :csv) do
+      = button_tag 'Download CSV', class: 'btn btn-secondary float-right'
+  .col-2
+    = form_tag products_csv_upload_path, multipart: true do
+      div = file_field_tag :csv_file
+      div = submit_tag :upload
 
 .row.mt-2
   .col
@@ -23,6 +30,7 @@
       thead.thead-dark
         tr
           th ID
+          th Status
           th Title
           th Stock
           th Description
@@ -34,6 +42,7 @@
         - @products.each do |a|
           tr
             td = a.id
+            td = a.status
             td.font-weight-bold = a.title
             td = a.stock
             td = a.description
