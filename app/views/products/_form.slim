@@ -1,4 +1,7 @@
 = form_with model: @product do |f|
+  div = f.label :status, "Status:"
+  div = f.select :status, Product.statuses.map { |key, value| [key.humanize, key] }
+  br
   div Product title
   div = f.text_field :title, placeholder: 'Title'
 

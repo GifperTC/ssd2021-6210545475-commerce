@@ -61,7 +61,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:title, :description, :stock, category_ids: [])
+    params.require(:product).permit(:status, :title, :description, :stock, category_ids: [])
   end
 
   def generate_csv(products)
