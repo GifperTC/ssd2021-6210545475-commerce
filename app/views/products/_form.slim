@@ -9,7 +9,7 @@
   div = f.text_area :description, placeholder: 'Write description here'
 
   div Product stock
-  div = f.text_field :stock
+  div = f.number_field :stock
 
   div Category
   div = f.collection_check_boxes :category_ids, Category.all, :id, :name
