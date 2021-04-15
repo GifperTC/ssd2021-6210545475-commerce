@@ -3,12 +3,21 @@ h1 = @product.title
 div = link_to "Back", products_path
 hr
 
-h4 Number in stock
+  - if @product.cover_image.attached?
+    = image_tag @product.cover_image, width: '150px'
+hr
+h5 Number in stock
 div = @product.stock
 
 hr
 
-h4 Description
+h3 Description
 div = @product.description
+hr
+h4 Description Images
+hr
+  - if @product.images.attached?
+    - @product.images.each do |pic|
+      = image_tag pic, width: '100px'
 
 hr

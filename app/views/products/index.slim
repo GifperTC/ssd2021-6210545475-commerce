@@ -29,11 +29,12 @@
     table.table.table-bordered.table-hover
       thead.thead-dark
         tr
-          th ID
+          th Cover
           th Status
           th Title
           th Stock
           th Description
+          th Desc Images
           th Categories
           th Created at
           th Updated at
@@ -41,11 +42,28 @@
       tbody
         - @products.each do |a|
           tr
-            td = a.id
+            td style="text-align: center"
+              .row
+                - if a.cover_image.attached?
+                  .col
+                    = link_to "/admin/items/d_cover_image/#{a.id}", method: :delete, data: { confirm: "Are you sure?" } do
+                      i.fas.fa-trash
+                  .col
+                    span
+                      = image_tag a.cover_image, width: '100px'
             td = a.status
             td.font-weight-bold = a.title
             td = a.stock
             td = a.description
+            td
+              - if a.images.attached?
+                .col-9
+                  span
+                    = link_to "/admin/items/d_desc_images/#{a.id}", method: :delete, data: { confirm: "Are you sure?" } do
+                      i.fas.fa-trash
+                .col-9
+                  - a.images.each do |pic|
+                    = image_tag pic, width: '64px'
             td = a.categories.map(&:name)&.join(', ').presence || 'NA'
             td.font-weight-light = "#{time_ago_in_words(a.created_at)} ago"
             td.font-weight-light = "#{time_ago_in_words(a.updated_at)} ago"

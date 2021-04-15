@@ -49,6 +49,18 @@ class ProductsController < ApplicationController
     redirect_to action: :index
   end
 
+  def d_cover_image
+    @product = Product.find(params[:id])
+    @product.cover_image.purge
+    redirect_to action: :index
+  end
+
+  def d_desc_images
+    @product = Product.find(params[:id])
+    @product.images.purge
+    redirect_to action: :index
+  end
+
   def csv_upload
     data = params[:csv_file].read.split("\n")
     data.each do |line|
@@ -61,7 +73,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:status, :title, :description, :stock, category_ids: [])
+    params.require(:product).permit(:status, :title, :description, :cover_image, :stock,  category_ids: [], images: [])
   end
 
   def generate_csv(products)

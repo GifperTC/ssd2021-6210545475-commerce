@@ -2,15 +2,28 @@
   div = f.label :status, "Status:"
   div = f.select :status, Product.statuses.map { |key, value| [key.humanize, key] }
   br
+  div Cover image
+  div = f.file_field :cover_image
+  br
+    - if @product.cover_image.attached?
+      = image_tag @product.cover_image, width: '150px'
+  br
   div Product title
   div = f.text_field :title, placeholder: 'Title'
-
+  br
   div Product description
   div = f.text_area :description, placeholder: 'Write description here'
-
+  br
+  div Description images
+  div = f.file_field :images, multiple: true
+  br
+    - if @product.images.attached?
+      - @product.images.each do |pic|
+        = image_tag pic, width: '64px'
+  br
   div Product stock
   div = f.number_field :stock
-
+  br
   div Category
   div = f.collection_check_boxes :category_ids, Category.all, :id, :name
   button = 'Submit Product'
