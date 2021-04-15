@@ -34,7 +34,7 @@
           th Title
           th Stock
           th Description
-          th Desc Images
+          th Images
           th Categories
           th Created at
           th Updated at
@@ -50,12 +50,12 @@
                       i.fas.fa-trash
                   .col
                     span
-                      = image_tag a.cover_image, width: '100px'
+                      = image_tag a.cover_image, width: '100px', objectFit: 'cover'
             td = a.status
             td.font-weight-bold = a.title
             td = a.stock
             td = a.description
-            td
+            td style="text-align: center"
               - if a.images.attached?
                 .col-9
                   span
@@ -63,7 +63,7 @@
                       i.fas.fa-trash
                 .col-9
                   - a.images.each do |pic|
-                    = image_tag pic, width: '64px'
+                    = image_tag pic, width: '32px'
             td = a.categories.map(&:name)&.join(', ').presence || 'NA'
             td.font-weight-light = "#{time_ago_in_words(a.created_at)} ago"
             td.font-weight-light = "#{time_ago_in_words(a.updated_at)} ago"

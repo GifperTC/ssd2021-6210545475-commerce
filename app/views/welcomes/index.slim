@@ -14,20 +14,31 @@
     table.table.table-bordered.table-hover
       thead.thead-dark
         tr
-          th ID
+          th Cover
           th Title
           th Stock
           th Description
+          th Images
           th Categories
           th Created at
           th Updated at
       tbody
         - @products.each do |a|
           tr
-            td = a.id
+            td style="text-align: center"
+              .row
+                - if a.cover_image.attached?
+                  .col
+                    span
+                      = image_tag a.cover_image, width: '32px', objectFit: 'cover'
             td.font-weight-bold = a.title
             td = a.stock
             td = a.description
+            td style="text-align: center"
+              - if a.images.attached?
+                .col
+                  - a.images.each do |pic|
+                    = image_tag pic, width: '32px', objectFit: 'cover'
             td = a.categories.map(&:name)&.join(', ').presence || 'NA'
             td.font-weight-light = "#{time_ago_in_words(a.created_at)} ago"
             td.font-weight-light = "#{time_ago_in_words(a.updated_at)} ago"
