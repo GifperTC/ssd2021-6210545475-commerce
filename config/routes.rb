@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'welcomes#index'
-
+  
   scope '/admin' do
     resources :products
     namespace :products do
