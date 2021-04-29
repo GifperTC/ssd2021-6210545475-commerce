@@ -1,14 +1,12 @@
 .row
-  .col-3
+  .col-4
     h1 This is product list
-  .col-3
-    div = link_to 'Admin login', products_path
-  .col-3
+  .col-4
     .float-right
       div = current_user.email
       div = "#{current_user.username}"
       div = link_to 'Logout', destroy_user_session_path, method: :delete
-  .col-3
+  .col-4
     .float-right
       = link_to categories_path do
         = button_tag 'View Category', class: 'btn btn-primary'
@@ -46,7 +44,7 @@
               .row
                 - if a.cover_image.attached?
                   .col
-                    = link_to "/admin/items/d_cover_image/#{a.id}", method: :delete, data: { confirm: "Are you sure?" } do
+                    = link_to "/admin/products/d_cover_image/#{a.id}", method: :delete, data: { confirm: "Are you sure?" } do
                       i.fas.fa-trash
                   .col
                     span
@@ -59,7 +57,7 @@
               - if a.images.attached?
                 .col-9
                   span
-                    = link_to "/admin/items/d_desc_images/#{a.id}", method: :delete, data: { confirm: "Are you sure?" } do
+                    = link_to "/admin/products/d_desc_images/#{a.id}", method: :delete, data: { confirm: "Are you sure?" } do
                       i.fas.fa-trash
                 .col-9
                   - a.images.each do |pic|

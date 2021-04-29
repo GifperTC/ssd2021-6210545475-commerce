@@ -1,0 +1,33 @@
+.row
+  .col
+    h1 This is orders list
+
+.row.mt-2
+  .col
+    table.table.table-bordered.table-hover
+      thead.thead-dark
+        tr
+          th Status
+          th Product
+          th Customer
+          th Amount
+          th Action
+      tbody
+        - @orders.each do |a|
+          tr
+            td = a.status
+            td = a.product.title
+            td = a.user.email
+            td = a.amount
+            td
+              span.ml-3
+                = link_to edit_order_path(a) do
+                  i.fas.fa-pen
+              span.ml-3
+                = link_to "/admin/orders/d_order/#{a.id}" do
+                  i.fas.fa-trash
+
+.row
+  .col-12
+    = paginate @orders
+

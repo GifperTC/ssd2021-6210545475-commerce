@@ -22,6 +22,7 @@
           th Categories
           th Created at
           th Updated at
+          th Action
       tbody
         - @products.each do |a|
           tr
@@ -42,6 +43,10 @@
             td = a.categories.map(&:name)&.join(', ').presence || 'NA'
             td.font-weight-light = "#{time_ago_in_words(a.created_at)} ago"
             td.font-weight-light = "#{time_ago_in_words(a.updated_at)} ago"
+            td
+              span
+                = link_to welcome_path(a) do
+                  i.fas.fa-eye
 
 .row
   .col-4

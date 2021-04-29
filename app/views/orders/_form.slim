@@ -1,0 +1,13 @@
+= form_with model: @order do |f|
+  div = f.label :product_id, "Product ID:"
+  div = f.number_field :product_id, value: @order.product_id || "#{params[:product_id]}", readonly: true
+  br
+  div = f.label :user_id, "User ID:"
+  div = f.number_field :user_id, value: @order.user_id || current_user.id, readonly: true
+  br
+  div = f.label :amount, "Amount:"
+  div = f.number_field :amount
+  br
+  div = f.submit 'Submit Order'
+  br
+

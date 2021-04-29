@@ -3,7 +3,7 @@ h1 = @product.title
 div = link_to new_order_path( :product_id => @product.id )
   button.btn.float-right.btn-success Buy Now
 
-div = link_to "Back", products_path
+div = link_to "Back", welcomes_path
 hr
 
   - if @product.cover_image.attached?
